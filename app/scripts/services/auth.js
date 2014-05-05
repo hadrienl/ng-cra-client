@@ -10,7 +10,6 @@ angular.module('ngCraClientApp')
 
         if (status === 401) {
           $location.path('/login');
-          return;
         }
         return $q.reject(rejection);
       }
