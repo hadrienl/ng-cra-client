@@ -80,17 +80,33 @@ angular.module('ngCraClientApp')
 
     $scope.step4 = function() {
       if ($scope.day.morning && $scope.day.afternoon) {
-        $scope.previousday = $scope.getDay(
-          new Date(+$scope.day.date - A_DAY)
-        );
-        if ($scope.previousday.date.getMonth() !==
-              $scope.day.date.getMonth() ||
-            ($scope.previousday.morning && $scope.previousday.afternoon)) {
-          $scope.step = 6;
-          return;
-        } else {
-          $scope.step = 5;
-        }
+
+        // Save day
+        $scope.day
+          .$save()
+          .$promise
+          .then(function() {
+            // Look for a previous day to complete
+            $scope.previousday = $scope.getDay(
+              new Date(+$scope.day.date - A_DAY)
+            );
+            if ($scope.previousday.date.getMonth() !==
+                  $scope.day.date.getMonth()) {
+              $scope.step = 6;
+              return;
+            }
+
+            if ($scope.previousday.morning &&
+                $scope.previousday.afternoon) {
+              $scope.step = 6;
+              return;
+            }
+
+            $scope.step = 5;
+          })
+          .catch(function(err) {
+            // TODO : display err
+          });
       }
     };
     $scope.step5 = function(v) {

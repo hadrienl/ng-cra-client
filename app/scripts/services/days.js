@@ -3,7 +3,7 @@
 angular.module('ngCraClientApp')
   .provider('Days', function() {
 
-    this.$get = function($http, $q) {
+    this.$get = function($http, $q, dateFilter) {
       function Days(config) {
         var $date;
 
@@ -34,6 +34,26 @@ angular.module('ngCraClientApp')
         _.each(config, function(v, k) {
           self[k] = v;
         });
+      };
+      Days.prototype.$save = function() {
+        var deferred = $q.defer(),
+          self = this;
+
+        $http({
+            method: 'post',
+            url: '/api/days/'+dateFilter(this.date, 'yyyy-MM-dd'),
+            data: this
+          })
+          .success(function() {
+            deferred.resolve(self);
+          })
+          .catch(function(err) {
+            deferred.reject(err);
+          });
+
+        self.$promise = deferred.promise;
+
+        return self;
       };
 
       Days.get = function(config) {
