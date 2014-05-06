@@ -73,35 +73,5 @@ describe('Controller: TodayCtrl', function () {
     scope.step1();
     expect(scope.day.afternoon).toBe('plm');
     expect(scope.step).toBe(3);
-    scope.step3(true);
-    expect(scope.day.afternoon).toBe('plm');
-    expect(scope.step).toBe(5);
-    scope.step5();
-    expect(scope.step).toBe(6);
-  });
-
-  it('should follow steps 2', function() {
-    expect(scope.step).toBe(1);
-    expect(scope.day.date).toEqual(new Date('2014-05-07'));
-    expect(scope.day.morning).toBe(null);
-    scope.day.morning = 'plm';
-    scope.step1();
-    expect(scope.day.afternoon).toBe('plm');
-    expect(scope.step).toBe(3);
-    scope.step3(true);
-    expect(scope.day.afternoon).toBe('plm');
-    expect(scope.step).toBe(5);
-    scope.step5(true);
-
-    expect(scope.step).toBe(1);
-    expect(scope.day.date).toEqual(new Date('2014-05-06'));
-    expect(scope.day.morning).toBe(null);
-    scope.day.morning = 'plm';
-    scope.step1();
-    scope.step3();
-    expect(scope.step).toBe(4);
-    scope.day.afternoon = 'ng-cra';
-    scope.step4();
-    expect(scope.step).toBe(6);
   });
 });

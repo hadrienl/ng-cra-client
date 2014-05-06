@@ -1,10 +1,11 @@
 'use strict';
 
 angular.module('ngCraClientApp')
-  .value('now', new Date('2014-05-08'))
-  .controller('TodayCtrl', function ($scope, Days, now, days) {
-    
+  .value('now', new Date())
+  .controller('TodayCtrl', function ($scope, Days, now, days, projects) {
     var A_DAY = 1000 * 60 * 60 * 24;
+
+    $scope.projects = projects;
 
     $scope.getDay = function(date) {
       var day = _.find(days, function(d) {
@@ -35,11 +36,13 @@ angular.module('ngCraClientApp')
         }
       });
 
-      return project;
+      return _.findWhere($scope.projects, {pid: project});
     };
 
     $scope.setDay = function(date) {
       $scope.day = $scope.getDay(date);
+      $scope.morning = _.findWhere($scope.projects, {pid: $scope.day.morning});
+      $scope.afternoon = _.findWhere($scope.projects, {pid: $scope.day.afternoon});
 
       if ($scope.day.morning && $scope.day.afternoon) {
         $scope.step = 7;
@@ -54,15 +57,19 @@ angular.module('ngCraClientApp')
     $scope.setDay(now);
 
     $scope.step1 = function() {
-      if ($scope.day.morning) {
-        $scope.day.afternoon = $scope.day.morning;
+      if ($scope.morning) {
+        $scope.day.morning = $scope.morning.pid;
+        $scope.afternoon = $scope.morning;
+        $scope.day.afternoon = $scope.afternoon.pid;
         $scope.step = 3;
       }
     };
 
     $scope.step2 = function(v) {
       if (v) {
-        $scope.day.morning = $scope.getLastProject();
+        $scope.morning = $scope.getLastProject();
+        $scope.afternoon = $scope.morning;
+        $scope.day.morning = $scope.morning.pid;
         $scope.day.afternoon = $scope.day.morning;
         $scope.step = 3;
       } else {
@@ -71,7 +78,9 @@ angular.module('ngCraClientApp')
     };
 
     $scope.step3 = function(v) {
+      console.log(v, $scope);
       if (v) {
+        $scope.afternoon = $scope.morning;
         $scope.step4();
       } else {
         $scope.step = 4;
@@ -79,7 +88,11 @@ angular.module('ngCraClientApp')
     };
 
     $scope.step4 = function() {
-      if ($scope.day.morning && $scope.day.afternoon) {
+
+      if ($scope.morning && $scope.afternoon) {
+
+        $scope.day.morning = $scope.morning.pid;
+        $scope.day.afternoon = $scope.afternoon.pid;
 
         // Save day
         $scope.day

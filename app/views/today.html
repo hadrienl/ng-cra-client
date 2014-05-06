@@ -1,6 +1,6 @@
 <div  class="step-1"
       ng-show="step == 1">
-  <p>As-tu encore travaillé sur {{ getLastProject() }} {{ day.date|relativeDate }} ?</p>
+  <p>As-tu encore travaillé sur {{ getLastProject().displayname }} {{ day.date|relativeDate }} ?</p>
   <p>
     <button class="btn btn-primary"
             ng-click="step2(true)">Oui</button>
@@ -14,8 +14,8 @@
   <p>Sur quoi as-tu travaillé {{ day.date|relativeDate }} ?</p>
   <form ng-submit="step1()">
     <div class="form-group">
-      <input  type="text"
-              ng-model="day.morning">
+      <select ng-model="morning"
+              ng-options="project.displayname for project in projects"></select>
     </div>
     <p>
       <button type="submit"
@@ -43,18 +43,17 @@
       <label for="morning">
         Le matin :
       </label>
-      <input  type="text"
+      <select ng-model="morning"
               id="morning"
-              ng-model="day.morning">
+              ng-options="project.displayname for project in projects"></select>
     </div>
     <div class="form-group">
       <label for="afternoon">
         L'après-midi :
       </label>
-      <input  type="text"
+      <select ng-model="afternoon"
               id="afternoon"
-              ng-model="day.afternoon"
-              focus>
+              ng-options="project.displayname for project in projects"></select>
     </div>
     <p>
       <button type="submit"

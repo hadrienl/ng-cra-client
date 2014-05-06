@@ -20,6 +20,7 @@ module.exports = function(config) {
       'app/bower_components/lodash/dist/lodash.compat.js',
       'app/scripts/app.js',
       'app/scripts/services/days.js',
+      'app/scripts/services/projects.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
       'test/mock/**/*.js',

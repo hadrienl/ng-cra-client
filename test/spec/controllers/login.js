@@ -1,34 +1,5 @@
 'use strict';
 
-describe('Controller: LoginCtrl with authed user', function () {
-
-  // load the controller's module
-  beforeEach(module('ngCraClientApp'));
-
-  var LoginCtrl,
-    scope,
-    $location;
-
-  // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, Users) {
-    scope = $rootScope.$new();
-    $location = {
-      path: jasmine.createSpy('path')
-    };
-    scope.user = new Users({
-      uid: 1
-    });
-    LoginCtrl = $controller('LoginCtrl', {
-      $scope: scope,
-      $location: $location
-    });
-  }));
-
-  it('should redirect if user is logged', function () {
-    expect($location.path).toHaveBeenCalledWith('/')
-  });
-});
-
 describe('Controller: LoginCtrl', function () {
 
   // load the controller's module

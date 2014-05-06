@@ -2,7 +2,7 @@
 
 angular
   .module('ngCraClientApp')
-  .config(function ($routeProvider, $locationProvider, DaysProvider) {
+  .config(function ($routeProvider, $locationProvider, DaysProvider, ProjectsProvider) {
     $routeProvider
       .when('/login', {
         templateUrl: 'views/login.html',
@@ -16,7 +16,8 @@ angular
         templateUrl: 'views/today.html',
         controller: 'TodayCtrl',
         resolve: {
-          days: DaysProvider.loadCurrentMonth
+          days: DaysProvider.loadCurrentMonth,
+          projects: ProjectsProvider.loadProjects,
         }
       })
       .when('/calendar', {
