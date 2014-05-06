@@ -60,7 +60,7 @@ describe('Controller: LoginCtrl', function () {
     spyOn(scope.user, '$login').andCallThrough();
     scope.username = 'foo';
     scope.password = 'bar';
-    $httpBackend.expectPOST('/api/login')
+    $httpBackend.expectPOST('/api/auth/login')
       .respond({uid: 1, username: 'hadrien'});
 
     scope.submit();

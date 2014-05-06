@@ -16,7 +16,7 @@ angular.module('ngCraClientApp')
 
       $http({
         method: 'get',
-        url: '/api/test'
+        url: '/api/auth/test'
       })
       .success(function(data) {
         _.extend(ret, data);
@@ -36,7 +36,7 @@ angular.module('ngCraClientApp')
 
       $http({
         method: 'post',
-        url: '/api/login',
+        url: '/api/auth/login',
         data: {
           username: username,
           password: password
@@ -60,7 +60,7 @@ angular.module('ngCraClientApp')
 
       $http({
         method: 'get',
-        url: '/api/logout'
+        url: '/api/auth/logout'
       })
       .success(function() {
         _.extend(self, new Users());

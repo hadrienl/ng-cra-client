@@ -1,1 +1,85 @@
-<p>This is the today view.</p>
+<div  class="step-1"
+      ng-show="step == 1">
+  <p>As-tu encore travaillé sur {{ getLastProject() }} {{ day.date|relativeDate }} ?</p>
+  <p>
+    <button class="btn btn-primary"
+            ng-click="step2(true)">Oui</button>
+    <button class="btn btn-default"
+            ng-click="step2(false)">Non</button>
+  </p>
+</div>
+
+<div  class="step-2"
+      ng-show="step == 2">
+  <p>Sur quoi as-tu travaillé {{ day.date|relativeDate }} ?</p>
+  <form ng-submit="step1()">
+    <div class="form-group">
+      <input  type="text"
+              ng-model="day.morning">
+    </div>
+    <p>
+      <button type="submit"
+              class="btn btn-primary">OK</button>
+    </p>
+  </form>
+</div>
+
+<div  class="step-3"
+      ng-show="step == 3">
+  <p>As-tu travaillé sur ce projet toute la journée ?</p>
+  <p>
+    <button class="btn btn-primary"
+            ng-click="step3(true)">Oui</button>
+    <button class="btn btn-default"
+            ng-click="step3(false)">Non</button>
+  </p>
+</div>
+
+<div  class="step-4"
+      ng-show="step == 4">
+  <p>Sur quoi as-tu travaillé {{ day.date|relativeDate }} ?</p>
+  <form ng-submit="step4()">
+    <div class="form-group">
+      <label for="morning">
+        Le matin :
+      </label>
+      <input  type="text"
+              id="morning"
+              ng-model="day.morning">
+    </div>
+    <div class="form-group">
+      <label for="afternoon">
+        L'après-midi :
+      </label>
+      <input  type="text"
+              id="afternoon"
+              ng-model="day.afternoon"
+              focus>
+    </div>
+    <p>
+      <button type="submit"
+              class="btn btn-primary">OK</button>
+    </p>
+  </form>
+</div>
+
+<div  class="step-5"
+      ng-show="step == 5">
+  <p>Tu n'as pas renseigné le projet sur lequel tu travaillais {{ previousday.date|relativeDate }}. Veux tu le faire ?</p>
+  <p>
+    <button class="btn btn-primary"
+            ng-click="step5(true)">Oui</button>
+    <button class="btn btn-default"
+            ng-click="step5(false)">Non</button>
+  </p>
+</div>
+
+<div  class="step-6"
+      ng-show="step == 6">
+  <p>Merci, bonne journée !</p>
+</div>
+
+<div class="step-7"
+      ng-show="step == 7">
+  <p>Merci de m'avoir indiqué sur quoi tu as travaillé.</p>
+</div>

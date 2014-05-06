@@ -15,7 +15,7 @@ describe('Service: Users', function () {
   }));
 
   it('should get currently authentied user', function () {
-    $httpBackend.expectGET('/api/test')
+    $httpBackend.expectGET('/api/auth/test')
       .respond({uid: 1, username: 'hadrien'});
 
     var user = Users.get();
@@ -27,7 +27,7 @@ describe('Service: Users', function () {
   });
 
   it('should login', function () {
-    $httpBackend.expectPOST('/api/login')
+    $httpBackend.expectPOST('/api/auth/login')
       .respond({uid: 1, username: 'hadrien'});
 
     var user = new Users();
@@ -41,7 +41,7 @@ describe('Service: Users', function () {
   });
 
   it('should logout', function () {
-    $httpBackend.expectGET('/api/logout')
+    $httpBackend.expectGET('/api/auth/logout')
       .respond(false);
 
     var user = new Users({

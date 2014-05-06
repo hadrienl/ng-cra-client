@@ -28,7 +28,7 @@ describe('Controller: LogoutCtrl', function () {
   }));
 
   it('should attach a list of awesomeThings to the scope', function () {
-    $httpBackend.expectGET('/api/logout')
+    $httpBackend.expectGET('/api/auth/logout')
       .respond(false);
     expect(scope.user.$logout).toHaveBeenCalled();
     $httpBackend.flush();
