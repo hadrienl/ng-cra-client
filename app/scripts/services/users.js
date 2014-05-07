@@ -10,7 +10,7 @@ angular.module('ngCraClientApp')
       _.extend(this, config);
     }
 
-    Users.get = function() {
+    Users.get = function () {
       var deferred = $q.defer(),
         ret = new Users();
 
@@ -18,19 +18,20 @@ angular.module('ngCraClientApp')
         method: 'get',
         url: '/api/auth/test'
       })
-      .success(function(data) {
-        _.extend(ret, data);
-      })
-      .error(function(err) {
-        console.error(err);
-      });
+        .success(function (data) {
+          _.extend(ret, data);
+          deferred.resolve(ret);
+        })
+        .error(function (err) {
+          deferred.reject(err);
+        });
 
       ret.$promise = deferred.promise;
 
       return ret;
     };
 
-    Users.prototype.$login = function(username, password) {
+    Users.prototype.$login = function (username, password) {
       var deferred = $q.defer(),
         self = this;
 
@@ -42,19 +43,19 @@ angular.module('ngCraClientApp')
           password: password
         }
       })
-      .success(function(data) {
-        deferred.resolve(_.extend(self, data));
-      })
-      .error(function(err) {
-        deferred.reject(err);
-      });
+        .success(function (data) {
+          deferred.resolve(_.extend(self, data));
+        })
+        .error(function (err) {
+          deferred.reject(err);
+        });
 
-      this.$promise = deferred.promise;
+      self.$promise = deferred.promise;
 
       return this;
     };
 
-    Users.prototype.$logout = function() {
+    Users.prototype.$logout = function () {
       var deferred = $q.defer(),
         self = this;
 
@@ -62,15 +63,36 @@ angular.module('ngCraClientApp')
         method: 'get',
         url: '/api/auth/logout'
       })
-      .success(function() {
-        _.extend(self, new Users());
-        deferred.resolve(self);
-      })
-      .error(function(err) {
-        deferred.reject(err);
-      });
+        .success(function () {
+          _.extend(self, new Users());
+          deferred.resolve(self);
+        })
+        .error(function (err) {
+          deferred.reject(err);
+        });
 
-      this.$promise = deferred.promise;
+      self.$promise = deferred.promise;
+
+      return this;
+    };
+
+    Users.prototype.$save = function () {
+      var deferred = $q.defer(),
+        self = this;
+
+      $http({
+        method: 'put',
+        url: '/api/users/' + self.uid,
+        data: this
+      })
+        .success(function () {
+          deferred.resolve(self);
+        })
+        .error(function (err) {
+          deferred.reject(err);
+        });
+
+      self.$promise = deferred.promise;
 
       return this;
     };

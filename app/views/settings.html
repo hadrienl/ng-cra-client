@@ -1,1 +1,77 @@
-<p>This is the settings view.</p>
+<form role="form" name="settingsForm"
+      ng-submit="submit(settingsForm.$valid)" novalidate>
+    <div class="form-group">
+        <label for="username">
+            Nom d'utilisateur
+        </label>
+        <input id="username"
+               name="username"
+               class="form-control"
+               type="text"
+               placeholder="Nom d'utilisateur"
+               ng-model="user.username">
+    </div>
+    <div class="form-group">
+        <label for="firstname">
+            Prénom
+        </label>
+        <input id="firstname"
+               name="firstname"
+               class="form-control"
+               type="text"
+               placeholder="Prénom"
+               ng-model="user.firstname">
+    </div>
+    <div class="form-group">
+        <label for="lastname">
+            Nom
+        </label>
+        <input id="lastname"
+               name="lastname"
+               class="form-control"
+               type="text"
+               placeholder="Nom"
+               ng-model="user.lastname">
+    </div>
+    <div class="form-group">
+        <label for="oldpassword">
+            Ancien mot de passe
+        </label>
+        <input id="oldpassword"
+               name="oldpassword"
+               class="form-control"
+               type="password"
+               placeholder="Ancien mot de passe"
+               ng-model="user.oldpassword"
+               ng-required="user.newpassword">
+        <span class="help-block" ng-show="settingsForm.oldpassword.$error.required">Mots de passe requis</span>
+    </div>
+    <div class="form-group">
+        <label for="newpassword">
+            Nouveau mot de passe
+        </label>
+        <input id="newpassword"
+               name="newpassword"
+               class="form-control"
+               type="password"
+               placeholder="Nouveau mot de passe"
+               ng-model="user.newpassword">
+    </div>
+    <div class="form-group">
+        <label for="confirmpassword">
+            Confirmation du mot de passe
+        </label>
+        <input id="confirmpassword"
+               name="confirmpassword"
+               class="form-control"
+               type="password"
+               placeholder="Mot de passe de confirmation"
+               ng-model="user.confirmpassword"
+               field-match="user.newpassword">
+        <span class="help-block" ng-show="settingsForm.confirmpassword.$error.unique">Mots de passe différent</span>
+    </div>
+    <button type="submit"
+            class="btn btn-primary">
+        Sauvegarder
+    </button>
+</form>

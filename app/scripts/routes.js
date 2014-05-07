@@ -17,7 +17,7 @@ angular
         controller: 'TodayCtrl',
         resolve: {
           days: DaysProvider.loadCurrentMonth,
-          projects: ProjectsProvider.loadProjects,
+          projects: ProjectsProvider.loadProjects
         }
       })
       .when('/calendar', {
@@ -26,7 +26,12 @@ angular
       })
       .when('/settings', {
         templateUrl: 'views/settings.html',
-        controller: 'SettingsCtrl'
+        controller: 'SettingsCtrl',
+        resolve: {
+          user: function (Users) {
+            return Users.get().$promise;
+          }
+        }
       })
       .otherwise({
         redirectTo: '/'

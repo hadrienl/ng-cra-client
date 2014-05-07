@@ -6,7 +6,10 @@
   font-weight: normal;
 }
 app-header .row {
-  margin: 0; 
+  margin: 0;
+}
+app-nav nav {
+  margin-bottom: 10px;
 }
 app-footer {
   position: fixed;

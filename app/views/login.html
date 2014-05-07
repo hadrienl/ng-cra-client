@@ -1,29 +1,35 @@
-<form role="form"
-      ng-submit="submit()">
-  <div class="form-group">
-    <label for="username">
-      Username :
-    </label>
-    <input  type="text"
-            name="username"
-            id="username"
-            class="form-control"
-            ng-model="username">
-  </div>
-  <div class="form-group">
-    <label for="password">
-      Password :
-    </label>
-    <input  type="password"
-            name="password"
-            id="password"
-            class="form-control"
-            ng-model="password">
-  </div>
-  <div class="form-group">
-    <button type="submit"
-            class="btn btn-primary">
-      Login
-    </button>
-  </div>
+<form role="form" name="loginForm" ng-submit="submit()" novalidate>
+    <div class="form-group">
+        <label for="username">
+            Username :
+        </label>
+        <input type="text"
+               name="username"
+               id="username"
+               class="form-control"
+               ng-model="username"
+               placeholder="Nom d'utilisateur"
+               required>
+        <span class="help-block" ng-show="loginForm.username.$error.required">Requis</span>
+    </div>
+    <div class="form-group">
+        <label for="password">
+            Mot de passe :
+        </label>
+        <input type="password"
+               name="password"
+               id="password"
+               class="form-control"
+               ng-model="password"
+               placeholder="Mot de passe"
+               required>
+        <span class="help-block" ng-show="loginForm.password.$error.required">Requis</span>
+    </div>
+    <div class="form-group">
+        <button type="submit"
+                class="btn btn-primary"
+                ng-disabled="loginForm.$invalid">
+            Login
+        </button>
+    </div>
 </form>
