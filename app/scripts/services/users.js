@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ngCraClientApp')
-  .service('Users', function Users($http, $q) {
+  .factory('Users', function Users($http, $q) {
     function Users(config) {
       this.uid = null;
       this.username = '';
