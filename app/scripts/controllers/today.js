@@ -78,7 +78,6 @@ angular.module('ngCraClientApp')
     };
 
     $scope.step3 = function(v) {
-      console.log(v, $scope);
       if (v) {
         $scope.afternoon = $scope.morning;
         $scope.step4();
