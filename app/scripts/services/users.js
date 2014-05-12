@@ -10,13 +10,15 @@ angular.module('ngCraClientApp')
       _.extend(this, config);
     }
 
-    Users.get = function () {
+    Users.get = function (config) {
       var deferred = $q.defer(),
         ret = new Users();
 
+      config = config || {};
+
       $http({
         method: 'get',
-        url: '/api/auth/test'
+        url: '/api/users/' + (config.uid || '')
       })
         .success(function (data) {
           _.extend(ret, data);
@@ -29,6 +31,23 @@ angular.module('ngCraClientApp')
       ret.$promise = deferred.promise;
 
       return ret;
+    };
+
+    Users.checkUsername = function (username) {
+      var deferred = $q.defer();
+
+      $http({
+        method: 'get',
+        url: '/api/users/username/exists/' + username
+      })
+        .success(function (data) {
+          deferred.resolve(parseInt(data));
+        })
+        .error(function (err) {
+          deferred.reject(err);
+        });
+
+      return deferred.promise;
     };
 
     Users.prototype.$login = function (username, password) {

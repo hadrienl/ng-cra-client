@@ -26,12 +26,7 @@ angular
       })
       .when('/settings', {
         templateUrl: 'views/settings.html',
-        controller: 'SettingsCtrl',
-        resolve: {
-          user: function (Users) {
-            return Users.get().$promise;
-          }
-        }
+        controller: 'SettingsCtrl'
       })
       .otherwise({
         redirectTo: '/'
